@@ -6,6 +6,6 @@ The projects developed in the IT area have delivery deadlines that need to be mo
 
 The IT contract include any penalties as a result of a missed SLA by a project. 
 
-These penalties range from a formal warning to even 5% of total value of the bill will be charged as penalty.
+These penalties range from a formal warning to even 5% of total value of the bill to be charged as penalty.
  
  
