@@ -20,12 +20,12 @@ These penalties range from a formal warning to even 5% of total value of the bil
 projectIndicator.R
 
 
-#Input
+# Input
 Json file extracted from Jira app:
 response-data-export.json 
 
 
-#Outputs
+# Outputs
 a) Monthly Deadline Indicator:
 IAT-Mes Fevereiro 2020.pdf
 IAT-Mes Fevereiro 2020.png
