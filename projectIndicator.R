@@ -15,7 +15,7 @@ library("Cairo")
 library("lubridate")
 library("readr")
 
-result <-  RJSONIO::fromJSON("response-data-export.json",encoding="UTF-8")
+result <-  RJSONIO::fromJSON("input/response-data-export.json",encoding="UTF-8")
 
 matchData.i <- lapply(result$issues, function(x){ unlist(x)})
 
@@ -162,7 +162,7 @@ a <- #ggplot(data=indicadorSumarizado,aes(x=month_Year,y=Indicador.de.Prazo,labe
   #labs(caption ="IAT > 95%: OK\n90% < IAT <=95%: Advertência\nIAT <= 90%: Penalidade de 5%") +
   #scale_fill_discrete(name = "Tipo de Penalidade") +
   scale_fill_discrete(name = "Penalty") +
-  scale_y_continuous("IAT", labels = percent_format()) +
+  scale_y_continuous("PDI", labels = percent_format()) +
   scale_fill_manual(values = cores)
   
 b <- ggplot(data=indicadorMensal,aes(x=month_Year,y=qtd,label=qtd*100)) + geom_col(aes(fill = OS),width = 0.2,position = position_dodge2(width = 1, preserve = "total")) + geom_text(position = position_dodge2(width = 1, preserve = "total"),vjust=-0.5,size=3) +
@@ -189,12 +189,12 @@ c <- ggplot(data=penalidadeSumarizada,aes(x=month_Year,y=n,label=n)) + geom_col(
 
 fileIATMensal = paste("IAT-Mes",currentMonth)
 
-ggsave(filename="IAT-Sumarizado-Mensal.png", plot=a)
+ggsave(path = "C:/R_out/IndicadorOS/output",filename="IAT-Sumarizado-Mensal.png", plot=a)
 
-ggsave(filename=paste(fileIATMensal,".png"), plot=b)
+ggsave(path = "C:/R_out/IndicadorOS/output",filename=paste(fileIATMensal,".png"), plot=b)
 
-ggsave(filename="IAT-Quantitativo-Penalidade-Mensal.png", plot=c)
+ggsave(path = "C:/R_out/IndicadorOS/output",filename="IAT-Quantitativo-Penalidade-Mensal.png", plot=c)
 
-ggsave(filename="IAT-Sumarizado-Mensal.pdf", plot=a, device=cairo_pdf, width = 12, height = 4, units = "in", dpi = 600)
-ggsave(filename=paste(fileIATMensal,".pdf"), plot=b, device=cairo_pdf, width = 12, height = 4, units = "in", dpi = 600)
-ggsave(filename="IAT-Quantitativo-Penalidade-Mensal.pdf", plot=c, device=cairo_pdf, width = 8, height = 4, units = "in", dpi = 600)
+ggsave(path = "C:/R_out/IndicadorOS/output",filename="IAT-Sumarizado-Mensal.pdf", plot=a, device=cairo_pdf, width = 12, height = 4, units = "in", dpi = 600)
+ggsave(path = "C:/R_out/IndicadorOS/output",filename=paste(fileIATMensal,".pdf"), plot=b, device=cairo_pdf, width = 12, height = 4, units = "in", dpi = 600)
+ggsave(path = "C:/R_out/IndicadorOS/output",filename="IAT-Quantitativo-Penalidade-Mensal.pdf", plot=c, device=cairo_pdf, width = 8, height = 4, units = "in", dpi = 600)
