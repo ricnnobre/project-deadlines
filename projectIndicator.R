@@ -51,7 +51,7 @@ for(i in 1:nrow(matchData)) {
                as.numeric(sub("%", "",matrixA[i,"Deadline Indicator"] ,fixed=TRUE)) <= 95 )
         matrixA[i,"Penalty"] <- "Warning"
       else
-        matrixA[i,"Penalty"] <- "5% Fee"      
+        matrixA[i,"Penalty"] <- "5% Fine"      
     }
      
   }
@@ -88,7 +88,7 @@ foraSelecaoIndicador <- df %>%
   filter(Project.Type!="Manutenção" & Service.Type!="Diagnóstico")
 
 
-sheetIAT = paste("indicador_prazo",currentMonth,".xls")
+sheetIAT = paste("C:/R_out/IndicadorOS/output/indicador_prazo",currentMonth,".xls")
 if (nrow(indicadorSumarizadoMes)!=0)
 {
   write.xlsx(data.frame(indicadorSumarizadoMes), sheetIAT, sheetName = currentMonth, row.names = FALSE) 
@@ -149,7 +149,7 @@ penalidadeSumarizada <- df  %>%
 penalidadeSumarizada
 
 
-cores <- c("No"="seagreen3","Warning"="yellow2","5% Fee"="red4")
+cores <- c("No"="seagreen3","Warning"="yellow2","5% Fine"="red4")
 
 a <- #ggplot(data=indicadorSumarizado,aes(x=month_Year,y=Indicador.de.Prazo,label=Indicador.de.Prazo*100)) + geom_col(aes(fill=penalidade), position = position_dodge2(width = 1, preserve = "single")) + geom_text(position = position_dodge2(width = 1, preserve = "single"),vjust=-0.5,size=3) +
   ggplot(data=indicadorSumarizado,aes(x=month_Year,y=Deadline.Indicator)) + geom_col(aes(fill=Penalty), position = position_dodge2(width = 1, preserve = "single")) + 
@@ -158,7 +158,7 @@ a <- #ggplot(data=indicadorSumarizado,aes(x=month_Year,y=Indicador.de.Prazo,labe
   ggtitle("Project Deadline Indicator (PDI)",subtitle="Monthly Summary by Type of Penalty") +
   theme(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(face="bold",hjust = 0.5),axis.title = element_text(face = "bold"), legend.title = element_text(colour="black", size=11,face="bold"),plot.caption = element_text(face = "italic", size=7,hjust=1)) +
   #labs(caption = "fonte: Sistema Nacional de Informações Florestais - SNIF" ) +
-  labs(caption ="IAT > 95%: OK\n90% < IAT <=95%: Warning\nIAT <= 90%: 5% Fee") +
+  labs(caption ="IAT > 95%: OK\n90% < IAT <=95%: Warning\nIAT <= 90%: 5% Fine") +
   #labs(caption ="IAT > 95%: OK\n90% < IAT <=95%: Advertência\nIAT <= 90%: Penalidade de 5%") +
   #scale_fill_discrete(name = "Tipo de Penalidade") +
   scale_fill_discrete(name = "Penalty") +
@@ -174,7 +174,7 @@ b <- ggplot(data=indicadorMensal,aes(x=month_Year,y=qtd,label=qtd*100)) + geom_c
   #labs(caption = paste("IAT > 95: Nenhuma Penalidade","\n","90 < IAT <=95: Advertência","\n","IAT <= 90: Glosa e 5%",sep="")) +
   #labs(caption ="IAT > 95%: Nenhuma Penalidade   "\n"     90% < IAT <=95%: Advertência        IAT <= 90%: Glosa de 5%") +
   #labs(caption ="IAT > 95%: OK\n90% < IAT <=95%: Advertência\nIAT <= 90%: Penalidade de 5%") +
-  labs(caption ="IAT > 95%: OK\n90% < IAT <=95%: Warning\nIAT <= 90%: 5% Fee") +
+  labs(caption ="IAT > 95%: OK\n90% < IAT <=95%: Warning\nIAT <= 90%: 5% Fine") +
   scale_fill_discrete(name = "Project") +
   scale_y_continuous("PDI",labels=percent_format())
 
@@ -198,3 +198,4 @@ ggsave(path = "C:/R_out/IndicadorOS/output",filename="IAT-Quantitativo-Penalidad
 ggsave(path = "C:/R_out/IndicadorOS/output",filename="IAT-Sumarizado-Mensal.pdf", plot=a, device=cairo_pdf, width = 12, height = 4, units = "in", dpi = 600)
 ggsave(path = "C:/R_out/IndicadorOS/output",filename=paste(fileIATMensal,".pdf"), plot=b, device=cairo_pdf, width = 12, height = 4, units = "in", dpi = 600)
 ggsave(path = "C:/R_out/IndicadorOS/output",filename="IAT-Quantitativo-Penalidade-Mensal.pdf", plot=c, device=cairo_pdf, width = 8, height = 4, units = "in", dpi = 600)
+
