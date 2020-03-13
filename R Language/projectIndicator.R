@@ -1,5 +1,11 @@
 setwd("C:/R_out/IndicadorOS")
 
+#install.packages("RJDBC",INSTALL_opts='--no-multiarch')  -- Instalação de rJava apenas para x64
+#install.packages("remotes")
+#remotes::install_github("matbmeijer/JirAgileR")
+#Sys.setenv(R_REMOTES_STANDALONE="true") Caso haja algum erro na instalação do JirAgileR
+
+library("RJDBC")
 library("rjson")
 library("RJSONIO")
 library("xlsx")
@@ -14,6 +20,11 @@ library("emojifont")
 library("Cairo")
 library("lubridate")
 library("readr")
+library("JirAgileR")
+
+JiraQuery2R(domain, user = NULL, password = NULL, query,
+            fields = NULL, maxResults = NULL, verbose = FALSE)
+
 
 result <-  RJSONIO::fromJSON("input/response-data-export.json",encoding="UTF-8")
 
@@ -35,6 +46,7 @@ for(i in 1:nrow(matchData)) {
   matrixA[i,"Project"] <- as.character(matchData$fields.summary[i])
   matrixA[i,"Project Type"] <- as.character(matchData$fields.customfield_32941.value[i])
   matrixA[i,"Service Type"] <- as.character(matchData$fields.customfield_20952[i])
+  print(as.character(matchData$fields.customfield_20952[i]))
   matrixA[i,"Expected Start Date"] <- as.character(matchData$fields.customfield_10160[i])
   matrixA[i,"Expected End Date"] <- as.character(matchData$fields.customfield_10156[i])
   matrixA[i,"Real End Date"] <- as.character(matchData$fields.customfield_14440[i])
